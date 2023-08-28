@@ -4,19 +4,23 @@ const express = require("express");
 const cors = require("cors");
 
 const { NotFoundError } = require("./expressError");
+const UPDATE_INTERVAL = 60000
 
 const hydrogenRoutes = require("./routes/hydrogenStations");
 const { getH2StatusAndUpdate } = require("./utils/h2StatusRequest");
 
+const morgan = require("morgan");
+
 const app = express();
 
 app.use(cors());
+app.use(morgan("tiny"));
 app.use(express.json());
 
 app.use("/stations", hydrogenRoutes)
 
 
-setInterval(getH2StatusAndUpdate, 60000)
+setInterval(getH2StatusAndUpdate, UPDATE_INTERVAL)
 
 
 /** Handle 404 errors -- this matches everything */

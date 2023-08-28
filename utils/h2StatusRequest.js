@@ -26,6 +26,8 @@ async function getH2StatusAndUpdate() {
             console.error("error", error)
         }
     }
+
+    console.log("Database last updated on", Date.now())
 }
 
 module.exports = {
