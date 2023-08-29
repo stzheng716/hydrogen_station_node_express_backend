@@ -20,9 +20,7 @@ async function h2StationScrap() {
 
                 const stationID = s.classList['1']
                 const stationName = s.childNodes[3].childNodes[1].textContent.trim()
-                // const h70StatusStr =  s.childNodes[5].childNodes[0].classList['1']
-                // const unknownStatusCode = 4;
-                // const h70StatusCode = unknownStatusCode;
+                console.log(s)
 
 
                 return {
