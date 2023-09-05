@@ -8,6 +8,7 @@ const h2URL = "https://m.h2fcp.org/"
 
 async function h2StationScrap() {
     let browser;
+    
     try {
         browser = await puppeteer.launch()
         const page = await browser.newPage()
@@ -20,8 +21,6 @@ async function h2StationScrap() {
 
                 const stationID = s.classList['1']
                 const stationName = s.childNodes[3].childNodes[1].textContent.trim()
-                console.log(s)
-
 
                 return {
                     stationID,

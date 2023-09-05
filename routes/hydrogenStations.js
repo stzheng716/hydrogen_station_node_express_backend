@@ -12,4 +12,11 @@ router.get("/", async function (req, res, next) {
     return res.json({ station })
 })
 
+router.get("/zipCode", async function (req, res, next) {
+    console.log("zipcode", req.query.zipCode)
+    const station = await HydrogenStations.getStation(req.query.zipCode);
+    console.log(station)
+    return res.json({ station })
+})
+
 module.exports = router;

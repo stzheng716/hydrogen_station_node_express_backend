@@ -105,6 +105,26 @@ class HydrogenStations {
 
         return stationsRes.rows;
     }
+
+    static async getStation(zipCode) {
+        const stationsRes = await db.query(`
+            SELECT stationID,
+                   station_name AS "stationName",
+                   h70_current_status AS "h70CurrentStatus",
+                   content_path AS "contentPath",
+                   longitude,
+                   latitude,
+                   street_address AS "streetAddress",
+                   city,
+                   us_state AS "state",
+                   zipcode,
+                   capacity_kg AS "capacityKg"
+            FROM hydrogen_station
+            WHERE zipcode = $1
+            ORDER BY stationID`, [zipCode]);
+
+        return stationsRes.rows;
+    }
 }
 
 module.exports = HydrogenStations;
