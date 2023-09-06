@@ -107,6 +107,11 @@ class HydrogenStations {
     }
 
     static async getStation(zipCode) {
+
+        if(zipCode === '') {
+            return this.findAll()
+        }
+
         const stationsRes = await db.query(`
             SELECT stationID,
                    station_name AS "stationName",
