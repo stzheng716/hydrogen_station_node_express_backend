@@ -4,18 +4,27 @@ const express = require("express");
 
 const { BadRequestError } = require("../expressError");
 const HydrogenStations = require("../models/hydrogenStation");
+const { getUserLocation } = require("../utils/getUserLocation");
+const nearbySort = require("nearby-sort")
 
 const router = express.Router();
 
-router.get("/", async function (req, res, next) {
-    const station = await HydrogenStations.findAll();
+router.get("/", async (req, res, next) => {
+    let station = await HydrogenStations.findAll();
+
+    //for local environment ip
+    if (req.ip === "::1") return res.json({ station })
+
+    const userCoordinate = await getUserLocation(req.ip)
+    
+    //sorts stations by distance from user
+    station = await nearbySort(userCoordinate, station);
+
     return res.json({ station })
 })
 
-router.get("/zipCode", async function (req, res, next) {
-    console.log("zipcode", req.query.zipCode)
+router.get("/zipCode", async (req, res, next) => {
     const station = await HydrogenStations.getStation(req.query.zipCode);
-    console.log(station)
     return res.json({ station })
 })
 

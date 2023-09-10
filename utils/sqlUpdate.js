@@ -1,7 +1,6 @@
 "use strict"
 
 function sqlForPartialUpdate(dataToUpdate, jsToSql) {
-  console.log("DATA TO UPDATE", dataToUpdate)
     const keys = Object.keys(dataToUpdate);
     if (keys.length === 0) throw new BadRequestError("No data");
   
@@ -17,4 +16,4 @@ function sqlForPartialUpdate(dataToUpdate, jsToSql) {
 
   module.exports = {
     sqlForPartialUpdate,
-  }
+  };

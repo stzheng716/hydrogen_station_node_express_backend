@@ -1,8 +1,8 @@
 "use strict";
 
-const puppeteer = require('puppeteer')
-const { getLongLat } = require('./geoCoder')
-const HydrogenStations = require('../models/hydrogenStation')
+const puppeteer = require('puppeteer');
+const { getLongLat } = require('./geoCoder');
+const HydrogenStations = require('../models/hydrogenStation');
 
 const h2URL = "https://m.h2fcp.org/"
 
@@ -66,3 +66,7 @@ async function h2StationScrap() {
 h2StationScrap().then(() => {
     console.log("Scrapped data and updated database")
     process.exit()})
+
+module.exports = {
+    h2StationScrap
+}

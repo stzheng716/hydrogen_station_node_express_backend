@@ -11,8 +11,6 @@ const options = {
     apiKey: OpenCage_API_KEY
 }
 
-console.log("openCAGE apikey", OpenCage_API_KEY)
-
 const geocoder = NodeGeocoder(options);
 
 async function getLongLat(address) {

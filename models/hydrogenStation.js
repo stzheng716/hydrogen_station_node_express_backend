@@ -10,7 +10,7 @@ class HydrogenStations {
         stationID,
         stationName,
         streetAddress,
-        city, 
+        city,
         state,
         zipCode,
         contentPath,
@@ -53,10 +53,10 @@ class HydrogenStations {
             longitude,
             latitude,
             streetAddress,
-            city, 
+            city,
             state,
             zipCode
-            ]
+        ]
         );
 
         const hydrogen_station = result.rows[0];
@@ -65,11 +65,11 @@ class HydrogenStations {
     }
 
     static async updateStation(stationID, data) {
-        const {setCols, values} = sqlForPartialUpdate(
+        const { setCols, values } = sqlForPartialUpdate(
             data, {
-                h70status: "h70_current_status",
-                capacity: "capacity_kg"
-            }
+            h70status: "h70_current_status",
+            capacity: "capacity_kg"
+        }
         );
 
         const handleVarIdx = "$" + (values.length + 1);
@@ -93,8 +93,8 @@ class HydrogenStations {
                    station_name AS "stationName",
                    h70_current_status AS "h70CurrentStatus",
                    content_path AS "contentPath",
-                   longitude,
-                   latitude,
+                   longitude AS long,
+                   latitude AS lat,
                    street_address AS "streetAddress",
                    city,
                    us_state AS "state",
@@ -108,7 +108,7 @@ class HydrogenStations {
 
     static async getStation(zipCode) {
 
-        if(zipCode === '') {
+        if (zipCode === '') {
             return this.findAll()
         }
 
@@ -117,15 +117,18 @@ class HydrogenStations {
                    station_name AS "stationName",
                    h70_current_status AS "h70CurrentStatus",
                    content_path AS "contentPath",
-                   longitude,
-                   latitude,
+                   longitude AS long,
+                   latitude AS lat,
                    street_address AS "streetAddress",
                    city,
                    us_state AS "state",
                    zipcode,
                    capacity_kg AS "capacityKg"
             FROM hydrogen_station
-            WHERE zipcode = $1
+            WHERE street_address ILIKE '%' || $1 || '%'
+                OR zipcode ILIKE '%' || $1 || '%'
+                OR city ILIKE '%' || $1 || '%'
+                OR station_name ILIKE '%' || $1 || '%'
             ORDER BY stationID`, [zipCode]);
 
         return stationsRes.rows;
