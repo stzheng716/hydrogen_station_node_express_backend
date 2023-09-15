@@ -23,7 +23,7 @@ router.get("/", async (req, res, next) => {
     return res.json({ station })
 })
 
-router.get("/zipCode", async (req, res, next) => {
+router.get("/search", async (req, res, next) => {
     const station = await HydrogenStations.getStation(req.query.zipCode);
     return res.json({ station })
 })

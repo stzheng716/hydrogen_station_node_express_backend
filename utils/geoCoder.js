@@ -1,10 +1,11 @@
 "use strict";
 
-require("dotenv").config({path: '../.env'});
+require("dotenv").config({path: '.env'});
 const NodeGeocoder = require('node-geocoder');
 
 const OpenCage_API_KEY = process.env.OPENCASE_API_KEY
 
+console.log(OpenCage_API_KEY)
 
 const options = {
     provider: 'opencage',
