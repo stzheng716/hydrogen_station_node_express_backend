@@ -10,9 +10,11 @@ async function h2StationScrap() {
     let browser;
     
     try {
-        browser = await puppeteer.launch()
-        const page = await browser.newPage()
-        await page.goto(h2URL)
+        browser = await puppeteer.launch({
+            headless: "new"
+        });
+        const page = await browser.newPage();
+        await page.goto(h2URL);
 
         const stationsInfo = await page.evaluate(() => {
             return Array.from(document.querySelectorAll("#block-system-main > div > div > div.view-content > table > tbody > tr")).map((s) => {
@@ -28,7 +30,7 @@ async function h2StationScrap() {
                     contentPath,
                 }
 
-            })
+            });
         })
 
 

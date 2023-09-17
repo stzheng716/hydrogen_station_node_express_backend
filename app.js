@@ -1,7 +1,7 @@
 "use strict";
 
 const express = require("express");
-const serverless = require("serverless-http")
+// const serverless = require("serverless-http")
 const cors = require("cors");
 
 const { NotFoundError } = require("./expressError");
@@ -13,7 +13,7 @@ const { getH2StatusAndUpdate } = require("./utils/h2StatusRequest");
 const morgan = require("morgan");
 
 const app = express();
-const handler = serverless(app)
+// const handler = serverless(app)
 
 app.use(cors());
 app.use(morgan("tiny"));
@@ -41,7 +41,9 @@ app.use(function (err, req, res, next) {
     });
 });
 
-module.exports = {
-    app,
-    handler
-};
+module.exports = app
+
+// module.exports = {
+//     app,
+//     handler,
+// };

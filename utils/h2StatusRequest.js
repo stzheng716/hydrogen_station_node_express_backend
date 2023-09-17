@@ -9,6 +9,8 @@ async function getH2StatusAndUpdate() {
     const resp = await axios.get(API_URL);
 
     const stationsStatus = resp.data;
+
+    console.log(stationsStatus)
     
     for(const station of stationsStatus) {
 
