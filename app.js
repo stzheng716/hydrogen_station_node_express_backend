@@ -5,7 +5,7 @@ const express = require("express");
 const cors = require("cors");
 
 const { NotFoundError } = require("./expressError");
-const UPDATE_INTERVAL = 60000
+const UPDATE_INTERVAL = 10000
 
 const hydrogenRoutes = require("./routes/hydrogenStations");
 const { getH2StatusAndUpdate } = require("./utils/h2StatusRequest");

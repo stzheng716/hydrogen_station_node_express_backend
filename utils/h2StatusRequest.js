@@ -11,8 +11,17 @@ async function getH2StatusAndUpdate() {
     const stationsStatus = resp.data;
 
     console.log(stationsStatus)
+
+    // Assuming the data is an array, iterate over it
+    // if (Array.isArray(stationsStatus)) {
+    //     data.forEach(item => {
+    //         console.log(item);
+    //     });
+    // }
     
-    for(const station of stationsStatus) {
+    for(let stationNum in stationsStatus) {
+
+        let station = stationsStatus[stationNum]
 
         try {
             const stationID = station.n.s;
